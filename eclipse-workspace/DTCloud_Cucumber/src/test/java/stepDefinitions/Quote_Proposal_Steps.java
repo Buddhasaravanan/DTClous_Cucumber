@@ -35,7 +35,7 @@ public class Quote_Proposal_Steps
 	@Then("validating item added to quote")
 	public void validating_item_added_to_quote() 
 	{
-	    Assert.assertEquals(qp.itemvalidation(), "item added");
+	    Assert.assertEquals(qp.itemvalidation(), "items added");
 	}
 
 	@When("the user add accessory to item")
@@ -47,7 +47,7 @@ public class Quote_Proposal_Steps
 	@Then("validating accessory added to quote")
 	public void validating_accessory_added_to_quote() 
 	{
-		Assert.assertEquals(qp.itemvalidation(), "item added");
+		Assert.assertEquals(qp.itemvalidation(), "items added");
 	}
 
 	@When("the user add new adjestment to quote")
