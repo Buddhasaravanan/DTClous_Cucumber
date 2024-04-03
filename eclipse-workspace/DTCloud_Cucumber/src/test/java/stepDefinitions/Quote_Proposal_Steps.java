@@ -91,6 +91,20 @@ public class Quote_Proposal_Steps
 	{
 		Assert.assertEquals(qp.laborvalidation(), "labor added");
 	}
+	
+	@When("the user add exsiting service plan to quote")
+	public void the_user_add_exsiting_service_plan_to_quote() 
+	{
+	    qp.add_service_plan();
+	}
+
+	@Then("validating service plan added or not")
+	public void validating_service_plan_added_or_not() 
+	{
+	    
+		Assert.assertTrue(qp.serviceplan_validation());      
+	}
+
 
 	@When("the user create new multimedia proposal")
 	public void the_user_create_new_multimedia_proposal() throws InterruptedException 
