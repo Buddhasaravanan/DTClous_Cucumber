@@ -31,6 +31,24 @@ public class Opportunity_Steps
 	{
 	    cnp.oppname();
 	}
+	
+	@When("the user select bulding type")
+	public void the_user_select_bulding_type()
+	{
+	    cnp.residential();
+	}
+	
+	@When("the user entering budget of opportunity")
+	public void the_user_entering_budget_of_opportunity() throws IOException 
+	{
+	   cnp.budget();
+	}
+	
+	@When("the user entering sqfeet of opportunity")
+	public void the_user_entering_sqfeet_of_opportunity() throws IOException 
+	{
+	    cnp.Sqfeet();
+	}
 
 	@When("the user select project type and market type")
 	public void the_user_select_project_type_and_market_type() 
@@ -38,7 +56,15 @@ public class Opportunity_Steps
 	    cnp.projectype();
 	    cnp.markettype();
 	}
-
+	
+	@When("the user select quote type")
+	public void the_user_select_quote_type() throws InterruptedException 
+	{
+	   cnp.quotetype();
+	   cnp.NXTbtn();
+	}
+	
+	
 	@When("the user entering client name")
 	public void the_user_entering_client_name() throws IOException, InterruptedException, AWTException 
 	{
@@ -51,11 +77,7 @@ public class Opportunity_Steps
 	   cnp.NXTbtn();
 	}
 
-	@When("the user entering sqfeet of opportunity")
-	public void the_user_entering_sqfeet_of_opportunity() throws IOException 
-	{
-	    cnp.Sqfeet();
-	}
+	
 
 	@When("the user click create button")
 	public void the_user_click_create_button() throws InterruptedException 
@@ -68,5 +90,6 @@ public class Opportunity_Steps
 	{
 	    Assert.assertEquals(cnp.createoppvalidation(), true);
 	}
+	
 
 }

@@ -42,7 +42,10 @@ Date d=new Date();
 	@FindBy(xpath="//ng-dropdown-panel[@role='listbox']") WebElement list;
 	@FindBy(xpath="//span[@class='ng-option-label ng-star-inserted'][normalize-space()='Service']") WebElement service;
 	@FindBy(xpath="//span[normalize-space()='Single Family Detached - Custom']")  WebElement markettypesingle;
-	
+	@FindBy(xpath="//label[contains (text(), 'Residential')]")  WebElement residential;
+	@FindBy(id="opportunityBudget")  WebElement oppbudget;
+	@FindBy(xpath="//div[@aria-expanded='true']")  WebElement quotetype;
+	@FindBy(xpath="//span[contains (text(), 'Bid/Spec')]")  WebElement bid;
 	
 	
 	
@@ -118,13 +121,23 @@ Date d=new Date();
 	}
 	
 	
+	public void residential()
+	{
+		residential.click();
+	}
 	
 	
+	public void budget() throws IOException
+	{
+		oppbudget.sendKeys(Base.getProperties().getProperty("Budget"));
+	}
 	
 	
-	
-	
-	
+	public void quotetype()
+	{
+		quotetype.click();
+		bid.click();
+	}
 	
 	
 	
