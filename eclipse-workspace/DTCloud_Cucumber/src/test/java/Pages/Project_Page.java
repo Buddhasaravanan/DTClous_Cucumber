@@ -21,7 +21,7 @@ public class Project_Page extends BasePage
 	}
 	
 	
-	
+	@FindBy(xpath="//div[@class='cdk-overlay-pane']")  WebElement toastmsg;
 	
 	
 	@FindBy(id="app-nav-projects") WebElement Project;
@@ -44,11 +44,15 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//a[contains (text(),'Add task')]") WebElement addtask;
 	@FindBy(xpath="//mat-icon[@svgicon='closeIcon']") WebElement canceltask;
 	@FindBy(xpath="//span[contains (text(),'Schedule')]") WebElement schedule;
+	@FindBy(xpath="//span[contains (text(),'New task group')]") WebElement newtaskgroup;
+	@FindBy(xpath="//input[@placeholder='New task group']") WebElement taskgroupname;
+	
 	@FindBy(xpath="//span[contains (text(),' Scheduling')]") WebElement scheduling;
 	@FindBy(xpath="(//mat-icon[@svgicon='addIcon'])[1]") WebElement addschedule;
 	@FindBy(xpath="//a[contains (text(), 'Assign Task')]") WebElement assigntask;
 	@FindBy(xpath="(//input[@type='checkbox'])[1]") WebElement taskcheckbox;
 	@FindBy(xpath="//span[contains (text(), 'Add selected tasks')]") WebElement addselectedtask;	
+	
 	@FindBy(xpath="//span[contains (text(), 'Time Tracking')]") WebElement timetracking;
 	@FindBy(id="btnTimeEntry") WebElement addnewtimeentry;
 	@FindBy(id="txt-app-search") WebElement addresource;
@@ -59,6 +63,7 @@ public class Project_Page extends BasePage
 	@FindBy(id="labor-tmin-input") WebElement labormins;
 	@FindBy(xpath="//input[@placeholder='Select Date(s)']") WebElement timeentrycalender;
 	@FindBy(xpath="//ng-select[@placeholder='Select labor type']") WebElement TElabortype;
+	
 	@FindBy(xpath="//input[@type='checkbox']") WebElement itemcheckbox;
 	@FindBy(xpath="//span[contains (text(), 'Create purchase order')]") WebElement createpurchaseorder;
 	@FindBy(id="nav-product-status") WebElement itemstatus;
@@ -66,6 +71,7 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//span[contains (text(), 'Continue')]") WebElement contunie;
 	@FindBy(xpath="//span[contains (text(), 'Send PO')]") WebElement sendpobutton;	
 	@FindBy(xpath="//mat-icon[@svgicon='closeIcon']") WebElement closeiconpo;
+	
 	@FindBy(id="nav-payments") WebElement payments;
 	@FindBy(xpath="//a[contains (text(), 'New payment request')]") WebElement newpaymentrequest;
 	@FindBy(id="btn-done-automation-setup") WebElement createpayments;
@@ -115,12 +121,25 @@ public class Project_Page extends BasePage
 		
 	}
 	
+	public boolean validatetask()
+	{
+		boolean tv = schedule.isDisplayed();
+		return tv;
+	}
 	
 	
+	public void createtaskgroup() throws IOException
+	{
+		newtaskgroup.click();
+		taskgroupname.sendKeys(Base.getProperties().getProperty("Taskgroupname"));
+		create.click();
+	}
 	
-	
-	
-	
+	public String validationtaskgroup()
+	{
+		  String tomsg = toastmsg.getText();
+				  return tomsg;
+	}
 	
 	
 	
