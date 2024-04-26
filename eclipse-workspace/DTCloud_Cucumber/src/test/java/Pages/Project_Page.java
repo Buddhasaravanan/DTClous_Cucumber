@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import factory.Base;
@@ -46,6 +48,18 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//span[contains (text(),'Schedule')]") WebElement schedule;
 	@FindBy(xpath="//span[contains (text(),'New task group')]") WebElement newtaskgroup;
 	@FindBy(xpath="//input[@placeholder='New task group']") WebElement taskgroupname;
+	@FindBy(xpath="(//span[@class='elipseName'])[1]") WebElement tasknameclick;
+	@FindBy(xpath="(//mat-icon[@svgicon='moreHorzIcon'])[3]") WebElement taskmoreicon;
+	@FindBy(xpath="//span[contains (text(), 'Edit')]") WebElement taskedit;
+	@FindBy(id="checklistFocus") WebElement checklist;
+	@FindBy(xpath="//a[contains (text(),'Add items')]") WebElement taskadditems;
+	@FindBy(id="select-all-items-input") WebElement selectallitem;
+	@FindBy(id="btn-add-task-items") WebElement addselecteditems;
+	@FindBy(xpath="//span[contains (text(), 'Finished adding')]") WebElement finishedadding;
+	@FindBy(id="btn-close-task") WebElement taskclosebtn;
+	@FindBy(xpath="(//div[@class='cursor-pointer'])[2]") WebElement taskelement;
+	
+	
 	
 	@FindBy(xpath="//span[contains (text(),' Scheduling')]") WebElement scheduling;
 	@FindBy(xpath="(//mat-icon[@svgicon='addIcon'])[1]") WebElement addschedule;
@@ -140,6 +154,67 @@ public class Project_Page extends BasePage
 		  String tomsg = toastmsg.getText();
 				  return tomsg;
 	}
+	
+	
+	public void hower()
+	{
+		Actions act = new Actions(Base.getdriver());
+		
+		act.moveToElement(taskelement);		
+	}
+
+	
+	public void edittask() throws InterruptedException
+	{
+		taskmoreicon.click();
+		taskedit.click();
+		Thread.sleep(3000);
+	}
+	
+	public void checklist() throws IOException
+	{
+		checklist.sendKeys(Base.getProperties().getProperty("Taskchecklist") + Keys.ENTER);
+		checklist.sendKeys(Base.getProperties().getProperty("Taskchecklist") + Keys.ENTER);
+	}
+	
+	public String CHLvalidation()
+	{
+		 String tomsg = toastmsg.getText();
+		  return tomsg;
+	}
+	
+	public void additem()
+	{
+		taskadditems.click();
+		selectallitem.click();
+		addselecteditems.click();
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

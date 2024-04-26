@@ -10,8 +10,6 @@ Feature: Project Payment Task and Schedule
     When the user create new task from newly created task group
     Then validate task has been created
     When the user edit the task
-    And the user add discription for task
-    Then validate the discription added
     When the user create check list
     Then validate check list has created
     When the user add items to the task

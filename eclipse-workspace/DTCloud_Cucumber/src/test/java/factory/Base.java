@@ -20,6 +20,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -139,6 +140,14 @@ public class Base {
 		r.keyPress(KeyEvent.VK_ENTER);
 		r.keyRelease(KeyEvent.VK_ENTER);
 	}
+	
+
+
+
+
+
+	
+	
 	
 	
 
