@@ -77,6 +77,8 @@ public class Project_Page extends BasePage
 	@FindBy(id="labor-tmin-input") WebElement labormins;
 	@FindBy(xpath="//input[@placeholder='Select Date(s)']") WebElement timeentrycalender;
 	@FindBy(xpath="//ng-select[@placeholder='Select labor type']") WebElement TElabortype;
+	@FindBy(xpath="(//div[@role='option'])[2]]") WebElement task;
+	
 	
 	@FindBy(xpath="//input[@type='checkbox']") WebElement itemcheckbox;
 	@FindBy(xpath="//span[contains (text(), 'Create purchase order')]") WebElement createpurchaseorder;
@@ -188,20 +190,47 @@ public class Project_Page extends BasePage
 		taskadditems.click();
 		selectallitem.click();
 		addselecteditems.click();
-		
+		finishedadding.click();
 	}
 	
+	public String addeditemvalidation()
+	{
+		 String tomsg = toastmsg.getText();
+		  return tomsg;
+	}
 	
+	public void taskclose()
+    {
+		taskclosebtn.click();
+    }
 	
+	public void clickschedulebutton()
+	{
+		schedule.click();
+	}
 	
+	public void schedulecreatebtn()
+	{
+		create.click();
+	}
 	
+	public String schudulevalidation()
+	{
+		 String tomsg = toastmsg.getText();
+		  return tomsg;
+	}
 	
-	
-	
-	
-	
-	
-	
+	public void timeentry() throws InterruptedException
+	{
+		timetracking.click();
+		Thread.sleep(3000);
+		addtimeentry.click();
+		addresource.click();
+		resource1.click();
+		selectprojecttask.click();
+		task.click();
+		
+	}
 	
 	
 	
