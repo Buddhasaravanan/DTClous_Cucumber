@@ -76,8 +76,10 @@ public class Project_Page extends BasePage
 	@FindBy(id="labor-thour-input") WebElement laborhour;
 	@FindBy(id="labor-tmin-input") WebElement labormins;
 	@FindBy(xpath="//input[@placeholder='Select Date(s)']") WebElement timeentrycalender;
+	@FindBy(xpath="//span[contains (text(), '16')]") WebElement date16;
+	@FindBy(xpath="//span[contains (text(),'Done')]") WebElement caldone;
 	@FindBy(xpath="//ng-select[@placeholder='Select labor type']") WebElement TElabortype;
-	@FindBy(xpath="(//div[@role='option'])[2]]") WebElement task;
+	@FindBy(xpath="(//div[@role='option'])[2]") WebElement task;
 	
 	
 	@FindBy(xpath="//input[@type='checkbox']") WebElement itemcheckbox;
@@ -220,25 +222,50 @@ public class Project_Page extends BasePage
 		  return tomsg;
 	}
 	
-	public void timeentry() throws InterruptedException
+	public void timetracking() throws InterruptedException
 	{
 		timetracking.click();
 		Thread.sleep(3000);
+	}
+	
+	public void timeentry() throws InterruptedException
+	{
 		addtimeentry.click();
 		addresource.click();
 		resource1.click();
 		selectprojecttask.click();
 		task.click();
+		TElabortype.click();
+		task.click();
+		houresworked.click();
+		laborhour.sendKeys("1");
+		addresource.click();
+		timeentrycalender.click();
+		date16.click();
+		caldone.click();
+		addtimeentry.click();	
 		
 	}
 	
+	public String timeentryvalidation()
+	{
+		 String tomsg = toastmsg.getText();
+		  return tomsg;
+	}
 	
 	
+	public void projectoverviewpage() throws InterruptedException
+	{
+		overview.click();
+		Thread.sleep(3000);
+	}
 	
 	
-	
-	
-	
+	public void paymentpage()
+	{
+		details.click();
+		payments.click();
+	}
 	
 	
 	
