@@ -97,6 +97,11 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//div[@aria-haspopup='menu']") WebElement paymentstatus;
 	@FindBy(xpath="(//span[contains (text(), ' Paid ')])[2]") WebElement paid;
 	@FindBy(xpath="//span[contains (text(), 'Save')]") WebElement paidstatussave;
+	@FindBy(xpath="//span[contains (text(),'Payment Request')]") WebElement paymentrequestvalidatetext;
+	@FindBy(xpath="//mat-icon[@svgicon='proposalShare']") WebElement sharepayemnt;
+	@FindBy(xpath="//span[contains (text(), 'Email')]") WebElement shareemail;
+	@FindBy(xpath="//app-contacts-integration[@placeholder='Type here to enter email or contact']") WebElement toemail;
+	@FindBy(xpath="//span[contains (text(), 'Send')]") WebElement sendmail;
 	
 	
 	
@@ -266,6 +271,63 @@ public class Project_Page extends BasePage
 		details.click();
 		payments.click();
 	}
+	
+	public void cretenewpayment() throws InterruptedException
+	{
+		newpaymentrequest.click();
+		Thread.sleep(3000);
+		createpayments.click();
+		Thread.sleep(3000);	
+	}
+	
+	public boolean validatenewpayment()
+	{
+		boolean payment = paymentrequestvalidatetext.isDisplayed();
+		return payment;
+	}
+	
+	public void sharepayment() throws InterruptedException, IOException
+	{
+		sharepayemnt.click();
+		shareemail.click();
+		Thread.sleep(3000);	
+		toemail.sendKeys(Base.getProperties().getProperty("proposal_email"));
+		sendmail.click();	
+	}
+	
+	public String paymentemailsharevalidation()
+	{
+		 String tomsg = toastmsg.getText();
+		  return tomsg;
+	}
+	
+	public void paymentstatus() throws InterruptedException
+	{
+		paymentbackicon.click();
+		Thread.sleep(3000);
+		paymentstatus.click();
+		paid.click();
+		Thread.sleep(3000);
+		paidstatussave.click();
+		Thread.sleep(3000);	
+	}
+	
+	public void paymentsummaryvalidation()
+	{
+		WebElement pa = driver.findElement(By.xpath("//tr[@class='ng-star-inserted green']//td[7]"));
+		pa.getText();
+		
+		WebElement pa1 = driver.findElement(By.xpath("//*[@id='container-PPE-scroll']/div/app-project-payments/div/div[1]/div[2]/span[2]"));
+		pa1.getText();
+		
+		
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 	
