@@ -1,5 +1,6 @@
 Feature: Change Orders
   
-  Scenario: 
+  Scenario: Basic functionality test for change orders
+  
 
   

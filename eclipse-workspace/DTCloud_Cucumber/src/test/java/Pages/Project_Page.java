@@ -312,7 +312,7 @@ public class Project_Page extends BasePage
 		Thread.sleep(3000);	
 	}
 	
-	public void paymentsummaryvalidation()
+	public boolean paymentsummaryvalidation()
 	{
 		WebElement pa = driver.findElement(By.xpath("//tr[@class='ng-star-inserted green']//td[7]"));
 		pa.getText();
@@ -320,7 +320,14 @@ public class Project_Page extends BasePage
 		WebElement pa1 = driver.findElement(By.xpath("//*[@id='container-PPE-scroll']/div/app-project-payments/div/div[1]/div[2]/span[2]"));
 		pa1.getText();
 		
-		
+		if(pa.equals(pa1))
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
 		
 	}
 	
