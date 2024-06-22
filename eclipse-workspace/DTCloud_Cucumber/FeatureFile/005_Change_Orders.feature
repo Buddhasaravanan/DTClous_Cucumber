@@ -21,7 +21,15 @@ Feature: Change Orders
     Then Validate proposal created
     When user accept the change order
     Then Validate accepted CO
-    
+    When user back to CO dashboard
+    And user click new change order button
+    And user select internal co and giving a name
+    And user click create and open change order
+    Then Validate new internal CO created
+    And user add item
+    Then Validate item added to CO
+    When user approve the internal CO
+    And user back to CO dashboard
     When the user go to project overview page
     And the user go to payment page
     And the user crete new payment request
