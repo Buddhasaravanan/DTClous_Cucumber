@@ -1,8 +1,12 @@
 package Pages;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import factory.Base;
 
 public class CO_Page extends BasePage
 {
@@ -43,6 +47,44 @@ public class CO_Page extends BasePage
 	@FindBy(id="btn-replace") WebElement replacebtn;
 	@FindBy(xpath="//div[contains (text(), 'Internal')]") WebElement internalco;
 	@FindBy(xpath="//span[contains (text(), ' Approve change order ')]") WebElement approvechangeorder;
+	
+	
+	
+	public void changeorder() throws InterruptedException
+	{
+		changeorder.click();
+		Thread.sleep(2000);
+	}
+	
+	public void createnewchangeorder()
+	{
+		createnewco.click();
+	}
+	
+	public void nameofco() throws IOException
+	{
+		coname.sendKeys(Base.getProperties().getProperty("ExternalCOName"));
+	}
+	
+	public void openco()
+	{
+		createcobtn.click();
+	}
+	
+	public boolean covalidation()
+	{
+		boolean ov = cooverview.isDisplayed();
+		return ov;
+	}
+	
+	public void designsection()
+	{
+		design.click();
+	}
+	
+	
+	
+	
 	
 	
 }
