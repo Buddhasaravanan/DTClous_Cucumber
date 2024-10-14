@@ -1,14 +1,22 @@
 package stepDefinitions;
 
+import java.io.IOException;
+
+import org.junit.Assert;
+
 import Pages.CO_Page;
+import Pages.Quote_Page;
 import factory.Base;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+
 
 public class ChangeOrder_Steps 
 {
 	
 	CO_Page cop = new CO_Page(Base.getdriver());
+	Quote_Page qp = new Quote_Page(Base.getdriver());
 	
 	@When("user navigate change order")
 	public void user_navigate_change_order() throws InterruptedException 
@@ -23,27 +31,27 @@ public class ChangeOrder_Steps
 	}
 
 	@When("user select external co and giving a name")
-	public void user_select_external_co_and_giving_a_name() 
+	public void user_select_external_co_and_giving_a_name() throws IOException 
 	{
-	    
+	    cop.nameofco();
 	}
 
 	@When("user click create and open change order")
 	public void user_click_create_and_open_change_order() 
 	{
-	    
+	    cop.openco();
 	}
 
 	@Then("Validate new CO created")
 	public void validate_new_co_created() 
 	{
-	   
+		Assert.assertTrue(cop.covalidation());
 	}
 
 	@When("user go to new co and select design section")
-	public void user_go_to_new_co_and_select_design_section() 
+	public void user_go_to_new_co_and_select_design_section() throws InterruptedException 
 	{
-	   
+	   cop.designsection();
 	}
 
 	@When("user remove original item with keep accessory")

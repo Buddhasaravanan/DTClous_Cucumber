@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import factory.Base;
@@ -77,14 +78,35 @@ public class CO_Page extends BasePage
 		return ov;
 	}
 	
-	public void designsection()
+	public void designsection() throws InterruptedException
 	{
 		design.click();
+		Thread.sleep(2000);
+	}
+	
+	public void hower1()
+	{
+		Actions act = new Actions(Base.getdriver());
+		
+		act.moveToElement(hower1stitem);
+	}
+	
+	public void removeitemwithkeepaccessory() throws InterruptedException
+	{
+		removeitem.click();
+		keepaccessory.click();
+		yesremove.click();
+		Thread.sleep(2000);	
 	}
 	
 	
-	
-	
+	public void validationaccessory()
+	{
+		Actions act = new Actions(Base.getdriver());
+		act.moveToElement(hower2stitem);
+		
+	   
+	}
 	
 	
 }

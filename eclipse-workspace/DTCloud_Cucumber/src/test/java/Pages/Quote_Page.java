@@ -99,7 +99,7 @@ public class Quote_Page extends BasePage
 		design.click();
 	}
 	
-	
+		
 	public void serach_item() throws IOException, InterruptedException
 	{
 		itemsearch.sendKeys(Base.getProperties().getProperty("item_name"));
