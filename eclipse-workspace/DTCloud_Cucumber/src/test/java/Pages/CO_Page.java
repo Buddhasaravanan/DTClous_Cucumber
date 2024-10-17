@@ -48,6 +48,10 @@ public class CO_Page extends BasePage
 	@FindBy(id="btn-replace") WebElement replacebtn;
 	@FindBy(xpath="//div[contains (text(), 'Internal')]") WebElement internalco;
 	@FindBy(xpath="//span[contains (text(), ' Approve change order ')]") WebElement approvechangeorder;
+	@FindBy(xpath="//span[text() = 'Removed']") WebElement removed;
+	@FindBy(xpath="//span[text() = 'Added']") WebElement added;
+	
+	
 	
 	
 	

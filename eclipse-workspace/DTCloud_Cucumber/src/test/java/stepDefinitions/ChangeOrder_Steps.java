@@ -51,7 +51,7 @@ public class ChangeOrder_Steps
 	@When("user go to new co and select design section")
 	public void user_go_to_new_co_and_select_design_section() throws InterruptedException 
 	{
-	   cop.designsection();
+	   cop.designsection();;
 	}
 
 	@When("user remove original item with keep accessory")
