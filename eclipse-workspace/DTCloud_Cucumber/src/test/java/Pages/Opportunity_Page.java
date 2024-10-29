@@ -29,7 +29,7 @@ Date d=new Date();
 	
 	
 	@FindBy(xpath="//mat-list-item[@id='app-nav-opportunities']") WebElement opportunities;
-	@FindBy(xpath="//button[@id='btn-create-opportunity']") WebElement newOpportunity;
+	@FindBy(xpath="//button[@id='btn-new-opportunity']") WebElement newOpportunity;
 	@FindBy(xpath="//input[@id='opportunityName']") WebElement opportunityName;
 	@FindBy(xpath="//ng-select[@id='opportunityProjectType']//div[@class='ng-select-container']") WebElement selectProjectType;
 	@FindBy(xpath="//ng-dropdown-panel[@role='listbox']") WebElement listbox;

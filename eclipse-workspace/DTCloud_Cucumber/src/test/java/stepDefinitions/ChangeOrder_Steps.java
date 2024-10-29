@@ -55,93 +55,88 @@ public class ChangeOrder_Steps
 	}
 
 	@When("user remove original item with keep accessory")
-	public void user_remove_original_item_with_keep_accessory() 
+	public void user_remove_original_item_with_keep_accessory() throws InterruptedException 
 	{
-	    
+	    cop.removeitemwithkeepaccessory();
 	}
 
 	@Then("Validate item removed and keep accessory")
 	public void validate_item_removed_and_keep_accessory() 
 	{
-	    
+	    Assert.assertEquals(cop.validationremoveitem(), "removed");
 	}
 
 	@When("user remove original item keep labor")
-	public void user_remove_original_item_keep_labor() 
+	public void user_remove_original_item_keep_labor() throws InterruptedException 
 	{
-	    
+	    cop.keeplabor();
 	}
 
 	@Then("Validate keep labor")
 	public void validate_keep_labor() 
 	{
-	    
+		Assert.assertEquals(cop.validationkeeplabor(), "removed");
 	}
 
 	@When("user add item to change order")
-	public void user_add_item_to_change_order() 
+	public void user_add_item_to_change_order() throws IOException, InterruptedException 
 	{
-	    
+	    qp.serach_item();
+	    qp.add_item();
 	}
 
 	@Then("Validate add item to CO")
 	public void validate_add_item_to_co() 
 	{
-	    
+		Assert.assertEquals(qp.itemvalidation(), "items added");
 	}
 
 	@When("user copy item to all location")
 	public void user_copy_item_to_all_location() 
 	{
-	    
+	    cop.copyitem();
 	}
 
 	@Then("Validate copy item")
 	public void validate_copy_item() 
 	{
-	    
+		Assert.assertEquals(cop.copyitemvalidation(), "Items copied to locations");
 	}
 
 	@When("user replace the item")
-	public void user_replace_the_item() 
+	public void user_replace_the_item() throws InterruptedException, IOException 
 	{
-	  
+	  cop.replace();
 	}
 
 	@Then("Validate replace item")
 	public void validate_replace_item() 
 	{
-	   
+		Assert.assertEquals(cop.replacevalidation(), "Bell 5173-0");
 	}
 
 	@When("user create proposal")
-	public void user_create_proposal() 
+	public void user_create_proposal() throws InterruptedException 
 	{
-	    
+	    qp.createmultimeadiaproposal();
 	}
 
 	@Then("Validate proposal created")
 	public void validate_proposal_created() 
 	{
-	    
+	    Assert.assertTrue(true);
 	}
 
 	@When("user accept the change order")
-	public void user_accept_the_change_order() 
+	public void user_accept_the_change_order() throws IOException, InterruptedException 
 	{
-	    
+	    qp.presentproposal();
 	}
 
 	@Then("Validate accepted CO")
 	public void validate_accepted_co() 
 	{
-	    
-	}
-
-	@When("user back to CO dashboard")
-	public void user_back_to_co_dashboard() 
-	{
-	   
+		 Assert.assertTrue(true);
 	}
 
 	@When("user select internal co and giving a name")

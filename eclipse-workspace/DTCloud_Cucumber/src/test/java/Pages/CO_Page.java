@@ -20,7 +20,7 @@ public class CO_Page extends BasePage
 	
 	@FindBy(xpath="//div[@class='cdk-overlay-pane']")  WebElement toastmsg;
 	
-	
+	@FindBy(id="nav-project-overview") WebElement overview;
 	@FindBy(id="nav-co") WebElement changeorder;
 	@FindBy(xpath="//span[contains (text(), 'New change order')]") WebElement createnewco;
 	@FindBy(xpath="//input[@placeholder='Change order name']") WebElement coname;
@@ -50,6 +50,15 @@ public class CO_Page extends BasePage
 	@FindBy(xpath="//span[contains (text(), ' Approve change order ')]") WebElement approvechangeorder;
 	@FindBy(xpath="//span[text() = 'Removed']") WebElement removed;
 	@FindBy(xpath="//span[text() = 'Added']") WebElement added;
+	@FindBy(xpath="//input[@id='add-product-search']") WebElement itemsearch;
+	@FindBy(xpath="//span[contains (text(), 'Select')]") WebElement selectitem;
+	@FindBy(xpath="//div[@id='item_0']") WebElement firstitem;
+	@FindBy(id="itemName") WebElement itemname;
+	
+	
+	
+	
+	
 	
 	
 	
@@ -92,24 +101,89 @@ public class CO_Page extends BasePage
 	{
 		Actions act = new Actions(Base.getdriver());
 		
-		act.moveToElement(hower1stitem);
+		act.moveToElement(hower1stitem).click().perform();
 	}
 	
 	public void removeitemwithkeepaccessory() throws InterruptedException
 	{
 		removeitem.click();
+		Thread.sleep(2000);	
 		keepaccessory.click();
 		yesremove.click();
 		Thread.sleep(2000);	
 	}
 	
 	
-	public void validationaccessory()
+	public boolean validationremoveitem()
 	{
-		Actions act = new Actions(Base.getdriver());
-		act.moveToElement(hower2stitem);
-		
-	   
+		boolean removetag = removed.isDisplayed();
+		return removetag;  
+	}
+	
+	
+	public void keeplabor() throws InterruptedException
+	{
+		removeitem.click();
+		keeplabor.click();
+		yesremove.click();
+		Thread.sleep(2000);	
+	}
+	
+	public boolean validationkeeplabor()
+	{
+		boolean removetag = removed.isDisplayed();
+		return removetag;  
+	}
+	
+	public void copyitem()
+	{
+		hower1();
+		copyitem.click();
+		alllocation.click();
+		copybtn.click();
+	}
+	
+	public String copyitemvalidation()
+	{
+		String toast = toastmsg.getText();
+		return toast;	
+	}
+	
+	public void createinternalco() throws IOException
+	{
+		createnewco.click();
+		internalco.click();
+		coname.sendKeys(Base.getProperties().getProperty("InternalCOName"));
+		createcobtn.click();
+	}
+	
+	public boolean internalcovalidation()
+	{
+		boolean ov = cooverview.isDisplayed();
+		return ov;
+	}
+	
+	public void replace() throws InterruptedException, IOException
+	{
+		hower1();
+		replace.click();
+		Thread.sleep(2000);	
+		itemsearch.click();
+		itemsearch.sendKeys(Base.getProperties().getProperty("replaceitem"));
+		Thread.sleep(3000);
+		firstitem.click();
+		selectitem.click();
+		Thread.sleep(2000);
+		maintainprice.click();
+		keeplabor.click();
+		keepaccessory.click();
+		replacebtn.click();
+	}
+	
+	public String replacevalidation()
+	{
+		String itm = itemname.getText();
+		return itm;
 	}
 	
 	
