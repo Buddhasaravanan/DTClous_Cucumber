@@ -140,15 +140,15 @@ public class ChangeOrder_Steps
 	}
 
 	@When("user select internal co and giving a name")
-	public void user_select_internal_co_and_giving_a_name() 
+	public void user_select_internal_co_and_giving_a_name() throws IOException 
 	{
-	    
+	    cop.createinternalco();
 	}
 
 	@Then("Validate new internal CO created")
 	public void validate_new_internal_co_created() 
 	{
-	    
+		Assert.assertTrue(cop.internalcovalidation());
 	}
 
 	@Then("user add item")
@@ -168,6 +168,13 @@ public class ChangeOrder_Steps
 	{
 	    
 	}
+	
+	@When("user back to CO dashboard")
+	public void user_back_to_co_dashboard() 
+	{
+	    
+	}
+
 	
 	
 	
