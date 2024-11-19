@@ -54,10 +54,9 @@ public class CO_Page extends BasePage
 	@FindBy(xpath="//span[contains (text(), 'Select')]") WebElement selectitem;
 	@FindBy(xpath="//div[@id='item_0']") WebElement firstitem;
 	@FindBy(id="itemName") WebElement itemname;
-	
-	
-	
-	
+	@FindBy(xpath="//span[contains (text(), 'Approve change order')]") WebElement Approveco;
+	@FindBy(xpath="(//span[contains (text(), 'Approve')])[2]") WebElement Approve1;
+	@FindBy(xpath="(//mat-icon[@svgicon='backIcon'])[1]") WebElement cobackicon;
 	
 	
 	
@@ -186,6 +185,21 @@ public class CO_Page extends BasePage
 		return itm;
 	}
 	
+	public void approveinternalco() throws InterruptedException
+	{
+		Approveco.click();
+		Thread.sleep(3000);
+		Approve1.click();
+		Thread.sleep(3000);
+	}
+	
+	public void coback() throws InterruptedException
+	{
+		cobackicon.click();
+		Thread.sleep(3000);
+		cobackicon.click();
+		Thread.sleep(3000);
+	}
 	
 }
 

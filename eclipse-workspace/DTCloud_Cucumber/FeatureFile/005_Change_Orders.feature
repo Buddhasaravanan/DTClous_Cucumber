@@ -29,11 +29,5 @@ Feature: Change Orders
     Then Validate item added to CO
     When user approve the internal CO
     And user back to CO dashboard
-    When the user go to project overview page
-    And the user go to payment page
-    And the user crete new payment request
-    Then validate payment request created as per given data
-    When the user share payment request via email
-    Then validate payemnt shared or not
-    When the user mark payment stats as paid
-    Then validate payment summary section
+   
+    

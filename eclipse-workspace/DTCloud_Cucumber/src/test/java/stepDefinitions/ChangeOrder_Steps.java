@@ -152,27 +152,28 @@ public class ChangeOrder_Steps
 	}
 
 	@Then("user add item")
-	public void user_add_item() 
+	public void user_add_item() throws IOException, InterruptedException 
 	{
-	    
+		qp.serach_item();
+	    qp.add_item();
 	}
 
 	@Then("Validate item added to CO")
 	public void validate_item_added_to_co() 
 	{
-	   
+		Assert.assertEquals(qp.itemvalidation(), "items added");
 	}
 
 	@When("user approve the internal CO")
-	public void user_approve_the_internal_co() 
+	public void user_approve_the_internal_co() throws InterruptedException 
 	{
-	    
+	    cop.approveinternalco();
 	}
 	
 	@When("user back to CO dashboard")
-	public void user_back_to_co_dashboard() 
+	public void user_back_to_co_dashboard() throws InterruptedException 
 	{
-	    
+	    cop.coback();
 	}
 
 	
