@@ -28,5 +28,5 @@ Feature: Service Call
     When user share the payment request
     Then validate payment request shared
     When user navigate to present mode
-    And  user download the PDF
+    And  user make the payment via card
     And  user back to serviceall dashboard
