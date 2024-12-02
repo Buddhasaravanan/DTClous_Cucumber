@@ -1,8 +1,15 @@
 package Pages;
 
+import java.io.IOException;
+
+import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import factory.Base;
+
 
 public class ServiceCall_Page extends BasePage
 {
@@ -19,6 +26,7 @@ public class ServiceCall_Page extends BasePage
 	@FindBy(id="app-nav-service-management-orders") WebElement calls;
 	@FindBy(xpath="//span[contains (text(), 'Schedule service')]") WebElement createservicecall;
 	@FindBy(xpath="//input[@name='client']") WebElement clientname;
+	@FindBy(xpath="//span[contains (text(), 'Bodhi')]") WebElement bodhi;
 	@FindBy(xpath="//div[contains (text(), 'E.g. Customer called into office on Tuesday stated their conference room projector stopped working.')]") WebElement issuereported;
 	@FindBy(xpath="//span[contains (text(), 'Done')]") WebElement issuereporteddone;
 	@FindBy(xpath="(//span[contains (text(), 'Create')])[2]]") WebElement createSC;
@@ -50,13 +58,135 @@ public class ServiceCall_Page extends BasePage
 	@FindBy(id="labor-tmin-input") WebElement labormins;
 	@FindBy(xpath="//ng-select[@placeholder='Select labor type']") WebElement TElabortype;
 	@FindBy(xpath="(//span[contains (text(),'Add')])[4]") WebElement timenetryadd;
+	@FindBy(xpath="//span[contains (text(), 'Add product')]") WebElement SCaddproduct;
+	@FindBy(xpath="//span[contains (text(), 'Repair Product')]") WebElement Repairproduct;
+	@FindBy(xpath="//span[contains (text(), 'Replace Product')]") WebElement replaceproduct;
+	@FindBy(xpath="//span[contains (text(), 'Additional Products Used')]") WebElement Additionalproductused;
+	@FindBy(xpath="//input[@id='add-product-search']") WebElement itemsearch;
+	@FindBy(xpath="//div[@id='item_0']") WebElement firstitem;
+	@FindBy(xpath="(//span[contains (text(), 'Add')])[1]") WebElement additem;
+	@FindBy(xpath="(//span[contains (text(), 'Next')])[1]") WebElement next;
+	@FindBy(xpath="(//span[contains (text(), 'Add')])[3]") WebElement add;
+	@FindBy(xpath="//div[contains (text(), 'Net 30')]") WebElement terms;
+	@FindBy(xpath="//div[contains (text(), ' Due upon receipt ')]") WebElement dueuponreceipt;
+	@FindBy(xpath="//span[contains (text(), 'Create')]") WebElement paymentreqcreate;
+	@FindBy(xpath="//mat-icon[@svgicon='proposalShare']") WebElement sharepayment;
+	@FindBy(xpath="//span[contains (text(), 'Email')]") WebElement email;
+	@FindBy(xpath="//input[@placeholder='Type here to enter email or contact']") WebElement tomail;
+	@FindBy(xpath="//span[contains (text(), 'Send')]") WebElement send;
+	@FindBy(xpath="//mat-icon[@svgicon='proposalPresent']") WebElement presentproposal;
+	@FindBy(xpath="//span[contains (text(), 'Submit payment')]") WebElement submitpayment;
+	@FindBy(id="method-card") WebElement creditcard;
+	@FindBy(xpath="//mat-icon[@svgicon=\"backIcon\"]") WebElement backicon;
+	
+	
+	
+		public void servicecallpage() throws InterruptedException
+		{
+			try {
+				
+			Service.click();
+			Thread.sleep(2000);
+			calls.click();
+			Thread.sleep(3000);
+		}
+			catch (Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+	} 
 	
 	
 	
 	
+	public void newservicecall() throws InterruptedException
+	{
+		try 
+		{
+			createservicecall.click();
+			Thread.sleep(1000);
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	
+	public void clientdetails() throws IOException, InterruptedException
+	{
+		try 
+		{
+			clientname.sendKeys(Base.getProperties().getProperty("Clientname"));
+			Thread.sleep(1000);
+			bodhi.click();
+			Thread.sleep(2000);
+			issuereported.sendKeys(Base.getProperties().getProperty("Issuereported"));
+			issuereporteddone.click();
+			createSC.click();
+			Thread.sleep(5000);
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	public void validationsccreated()
+	{
+		try
+		{
+			WebElement reqpay = requestpayment;
+			
+			if(reqpay.isDisplayed())
+			{
+				Assert.assertTrue("Request payment element should be displayed", reqpay.isDisplayed());
+			} 
+			else
+			{
+				Assert.fail("Request payment element is not displayed as expected.");
+			}
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	public void scrollpage()
+	{
+		try 
+		{
+			JavascriptExecutor js = (JavascriptExecutor) Base.getdriver();
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+			Thread.sleep(2000);
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
 	
 	
 	
+	public void scheduleSC()
+	{
+		try
+		{
+			
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
 	
 
 }
