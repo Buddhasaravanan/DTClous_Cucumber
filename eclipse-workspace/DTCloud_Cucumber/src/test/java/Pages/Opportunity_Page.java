@@ -31,30 +31,43 @@ Date d=new Date();
 	@FindBy(xpath="//mat-list-item[@id='app-nav-opportunities']") WebElement opportunities;
 	@FindBy(xpath="//button[@id='btn-new-opportunity']") WebElement newOpportunity;
 	@FindBy(xpath="//input[@id='opportunityName']") WebElement opportunityName;
-	@FindBy(xpath="//ng-select[@id='opportunityProjectType']//div[@class='ng-select-container']") WebElement selectProjectType;
+	@FindBy(id="opportunityProjectType")  WebElement selectProjectType;
+	@FindBy(id="buildingTypeId")  WebElement selectBulidingType;
 	@FindBy(xpath="//ng-dropdown-panel[@role='listbox']") WebElement listbox;
-	@FindBy(xpath="//ng-select[@id='marketType']//div[@class='ng-select-container']") WebElement selectMarketType;
+	//@FindBy(xpath="//div[contains (text(), 'Select market sector')]") WebElement selectMarketType;
+	@FindBy(id="marketSector")  WebElement selectMarketType;
 	@FindBy(xpath="//input[@placeholder='Client name']") WebElement clientName;
 	@FindBy(xpath="//div[@id='btn-create-opportunity']") WebElement next;
 	@FindBy(xpath="//input[@id='opportunityMeasurementLabel']") WebElement squareFeet;
 	@FindBy(xpath="//div[@id='btn-create-opportunity']") WebElement create;
 	@FindBy(xpath="//span[normalize-space()='Won']") WebElement wonbtn;
 	@FindBy(xpath="//ng-dropdown-panel[@role='listbox']") WebElement list;
-	@FindBy(xpath="//span[@class='ng-option-label ng-star-inserted'][normalize-space()='Service']") WebElement service;
-	@FindBy(xpath="//span[normalize-space()='Single Family Detached - Custom']")  WebElement markettypesingle;
-	@FindBy(xpath="//label[contains (text(), 'Residential')]")  WebElement residential;
+	@FindBy(xpath="//span[contains (text(), 'Service')]") WebElement service;
+	@FindBy(xpath="//span[contains (text(), 'Single Family Detached - Production')]")  WebElement markettypesingle;
+	@FindBy(xpath="//span[contains (text(), 'Residential')]")  WebElement residential;
 	@FindBy(id="opportunityBudget")  WebElement oppbudget;
-	@FindBy(xpath="//div[@aria-expanded='true']")  WebElement quotetype;
+	//@FindBy(xpath="//div[@aria-expanded='true']")  WebElement quotetype;
+	@FindBy(id="quoteType")  WebElement quotetype;
 	@FindBy(xpath="//span[contains (text(), 'Bid/Spec')]")  WebElement bid;
-	
-	
+	@FindBy(xpath="//button[contains (text(), 'OK')]")  WebElement cacshpopup;
 	
 	
 	
 	
 	public void click_opportunity() 
 	{
-		opportunities.click();
+		try 
+		{
+			cacshpopup.click();
+			opportunities.click();
+			
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 	public void click_newopportunity()
@@ -69,18 +82,36 @@ Date d=new Date();
 	
 	public void projectype()
 	{
-		WebElement dropdown = selectProjectType;
-		dropdown.click();
-		service.click();
+		try
+		{
+			selectProjectType.click();		
+			Thread.sleep(1000);
+			service.click();
+			Thread.sleep(3000);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
 		
 	}
 	
 	public void markettype()
 	{
-		WebElement dropdown = selectMarketType;
-		dropdown.click();
+		try
+		{
+			WebElement mrk = selectMarketType;
+			mrk.click();
+			Thread.sleep(1000);
+			markettypesingle.click();
+			Thread.sleep(1000);
+		}
 		
-		markettypesingle.click();
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		} 
+		
 		
 	}
 	
@@ -123,7 +154,17 @@ Date d=new Date();
 	
 	public void residential()
 	{
-		residential.click();
+		try 
+		{
+			selectBulidingType.click();
+			Thread.sleep(1000);
+			residential.click();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 	

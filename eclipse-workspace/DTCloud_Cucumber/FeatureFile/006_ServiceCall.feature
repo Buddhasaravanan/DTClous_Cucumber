@@ -10,6 +10,7 @@ Feature: Service Call
     Then validate new schedule created
     When user navigate to worksummary
     And user add labor
+    Then validate labor added
     And user add truk roll fee with tax
     Then validate truck roll fee added
     When user add drive time fee with tax

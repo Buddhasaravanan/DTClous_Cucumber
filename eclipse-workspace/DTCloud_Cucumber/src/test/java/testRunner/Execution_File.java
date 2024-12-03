@@ -12,11 +12,16 @@ import io.cucumber.junit.CucumberOptions;
 				 //features= {".//FeatureFile/Createnewopp.feature"},
 	              //features= {".//FeatureFile/Sanity_and_Smoke_Test.feature"}, 	
                  //feature= {"@target/rerun.txt"}.    
+				   
                  glue= "stepDefinitions",
+                 
                  plugin={ "pretty", "html:reports/myreport.html", "rerun:target/rerun.txt",
                 		 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+                 
                  dryRun=false,
+                 
                  monochrome=true,
+                 
                  publish=true
                      
                                                                                                            )

@@ -1,8 +1,10 @@
 package Pages;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -78,6 +80,8 @@ public class ServiceCall_Page extends BasePage
 	@FindBy(xpath="//span[contains (text(), 'Submit payment')]") WebElement submitpayment;
 	@FindBy(id="method-card") WebElement creditcard;
 	@FindBy(xpath="//mat-icon[@svgicon=\"backIcon\"]") WebElement backicon;
+	@FindBy(xpath="//*[@id=\"dtCloudApp\"]/app-root/mat-sidenav-container/mat-sidenav-content/mat-drawer-container/mat-drawer-content/main/span/span/app-service/app-service-call-detail/div/div[3]/div/div/div/div[3]/div/div[4]/div[2]") WebElement labortotal;
+	
 	
 	
 	
@@ -180,6 +184,83 @@ public class ServiceCall_Page extends BasePage
 	{
 		try
 		{
+			schedule9to5.click();
+			allavailableresource.click();
+			Thread.sleep(1000);
+			allresource.click();
+			Ajai.click();
+			SCschedule.click();
+			Thread.sleep(2000);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void validatescchedule()
+	{
+		try
+		{
+			String tmsg = toastmsg.getText();
+			
+			if(tmsg.equals("Service call scheduled"))
+			{
+				Assert.assertTrue(true);
+			}
+			
+			else
+			{
+				Assert.fail("Validation failed");
+			}
+			
+		}
+
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void worksummary()
+	{
+		try
+		{
+			worksummary.click();
+			Thread.sleep(2000);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void addlabor()
+	{
+		try
+		{
+			labortime.click();
+			Thread.sleep(1000);
+			addloabor.click();
+			labortype.click();
+			
+			List <WebElement> laborslist = driver.findElements(By.xpath("//ng-dropdown-panel[@role='listbox']"));
+			
+			for(WebElement labors : laborslist)
+			{
+				String laborname = labors.getText();
+				
+				if(laborname.equals("Standard Service"))
+				{
+					labors.click();
+					break;
+				}
+				
+			}
+			
+			laboradd.click();
+			Thread.sleep(1000);
+			laborclosebtn.click();
 			
 		}
 		catch (Exception e)
@@ -187,6 +268,38 @@ public class ServiceCall_Page extends BasePage
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	
+	public void laborvalidation()
+	{
+		try
+		{
+			 WebElement total = labortotal;
+			
+			 String laborprice = total.getText().trim();
+			 
+			 laborprice = laborprice.replaceAll("[^\\d]", "");
+			 
+			 int ttl = Integer.parseInt(laborprice);
+			 
+			 if(ttl > 0)
+			 {
+				 Assert.assertTrue(true);
+			 }
+			 else 
+			 {
+				 Assert.assertTrue(false);
+			 }
+			
+			
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
 	
 
 }
