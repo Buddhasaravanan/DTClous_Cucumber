@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -87,7 +88,8 @@ public class ServiceCall_Page extends BasePage
 	
 		public void servicecallpage() throws InterruptedException
 		{
-			try {
+			try 
+			{
 				
 			Service.click();
 			Thread.sleep(2000);
@@ -211,7 +213,7 @@ public class ServiceCall_Page extends BasePage
 			
 			else
 			{
-				Assert.fail("Validation failed");
+				Assert.fail("Service call scheduled Validation failed");
 			}
 			
 		}
@@ -300,6 +302,112 @@ public class ServiceCall_Page extends BasePage
 	}
 	
 	
+	public void truckroolfee()
+	{
+		try
+		{
+			truckrollfee.click();
+			Thread.sleep(1000);
+			truckrollfeevalue.sendKeys(Keys.BACK_SPACE);
+			truckrollfeevalue.sendKeys(Base.getProperties().getProperty("Truckrollfee"));
+			
+			List <WebElement> tax = driver.findElements(By.xpath("//div[@class='ng-dropdown-panel-items scroll-host']"));
+			
+			for(WebElement tax1 : tax)
+			{
+				String taxvalue = tax1.getText();
+				
+				if(taxvalue.equals("Sales Tax"))
+				{
+					tax1.click();
+					break;
+				}
+			}
+			
+			labortotal.click();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
 	
+	public void truckrollfeevalidation()
+	{
+		try
+		{
+			String tmsg = toastmsg.getText();
+			
+			if(tmsg.equals("Truck roll fee updated"))
+			{
+				Assert.assertTrue(true);
+			}
+			
+			else
+			{
+				Assert.fail("Truck Roll Fee Validation failed");
+			}
+			
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	public void drivetimefee()
+	{
+		try
+		{
+			drivetimefee.click();
+			Thread.sleep(1000);
+			drivetimefeevalue.sendKeys(Base.getProperties().getProperty("Drivetimefee"));
+			labortotal.click();
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void validationdrivetime()
+	{
+		try
+		{
+			String tmsg = toastmsg.getText();
+			
+			if(tmsg.equals("Drive time fee updated"))
+			{
+				Assert.assertTrue(true);
+			}
+			
+			else
+			{
+				Assert.fail("Drive time fee Validation failed");
+			}
+			
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void timeenrtry()
+	{
+		try
+		{
+			
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
 
 }
