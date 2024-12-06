@@ -27,7 +27,7 @@ public class Quote_Proposal_Steps
 	}
 
 	@When("the user add item to quote")
-	public void the_user_add_item_to_quote() 
+	public void the_user_add_item_to_quote() throws InterruptedException 
 	{
 	    qp.add_item();
 	}
@@ -35,7 +35,7 @@ public class Quote_Proposal_Steps
 	@Then("validating item added to quote")
 	public void validating_item_added_to_quote() 
 	{
-	    Assert.assertEquals(qp.itemvalidation(), "items added");
+	    Assert.assertEquals(qp.itemvalidation(), "Items added");
 	}
 
 	@When("the user add accessory to item")
@@ -47,11 +47,11 @@ public class Quote_Proposal_Steps
 	@Then("validating accessory added to quote")
 	public void validating_accessory_added_to_quote() 
 	{
-		Assert.assertEquals(qp.itemvalidation(), "items added");
+		Assert.assertEquals(qp.itemvalidation(), "Item added");
 	}
 
 	@When("the user add new adjestment to quote")
-	public void the_user_add_new_adjestment_to_quote() throws IOException 
+	public void the_user_add_new_adjestment_to_quote() throws IOException, InterruptedException 
 	{
 	    qp.addadjestment();
 	}
@@ -89,7 +89,7 @@ public class Quote_Proposal_Steps
 	@Then("Validating labor added to quote")
 	public void validating_labor_added_to_quote() 
 	{
-		Assert.assertEquals(qp.laborvalidation(), "labor added");
+		Assert.assertEquals(qp.laborvalidation(), "Item added");
 	}
 	
 	@When("the user add exsiting service plan to quote")

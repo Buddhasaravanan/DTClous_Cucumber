@@ -77,7 +77,6 @@ public class Opportunity_Steps
 	   cnp.NXTbtn();
 	}
 
-	
 
 	@When("the user click create button")
 	public void the_user_click_create_button() throws InterruptedException 
@@ -90,6 +89,8 @@ public class Opportunity_Steps
 	{
 	    Assert.assertEquals(cnp.createoppvalidation(), true);
 	}
+	
+	
 	
 
 }

@@ -27,6 +27,7 @@ Date d=new Date();
 	
 	Base bc=new Base();
 	
+
 	
 	@FindBy(xpath="//mat-list-item[@id='app-nav-opportunities']") WebElement opportunities;
 	@FindBy(xpath="//button[@id='btn-new-opportunity']") WebElement newOpportunity;
@@ -39,8 +40,8 @@ Date d=new Date();
 	@FindBy(xpath="//input[@placeholder='Client name']") WebElement clientName;
 	@FindBy(xpath="//div[@id='btn-create-opportunity']") WebElement next;
 	@FindBy(xpath="//input[@id='opportunityMeasurementLabel']") WebElement squareFeet;
-	@FindBy(xpath="//div[@id='btn-create-opportunity']") WebElement create;
-	@FindBy(xpath="//span[normalize-space()='Won']") WebElement wonbtn;
+	@FindBy(xpath="(//div[contains (text(),'Create')])[3]") WebElement create;
+	@FindBy(xpath="//span[contains (text(), 'Won')]") WebElement wonbtn;
 	@FindBy(xpath="//ng-dropdown-panel[@role='listbox']") WebElement list;
 	@FindBy(xpath="//span[contains (text(), 'Service')]") WebElement service;
 	@FindBy(xpath="//span[contains (text(), 'Single Family Detached - Production')]")  WebElement markettypesingle;
@@ -139,7 +140,7 @@ Date d=new Date();
 	public void createopp() throws InterruptedException
 	{
 		create.click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 	}
 	
 
@@ -147,7 +148,6 @@ Date d=new Date();
 	{
 		wonbtn.isDisplayed();
 		return true;
-		
 		
 	}
 	

@@ -20,7 +20,6 @@ public class Quote_Page extends BasePage
 		super(driver);
 	}
 	
-	
 	@FindBy(xpath="//div[@class='q-name']") WebElement quote;
 	@FindBy(xpath="//div[@id='nav-design']") WebElement design;
 	@FindBy(xpath="//input[@id='add-product-search']") WebElement itemsearch;
@@ -30,10 +29,10 @@ public class Quote_Page extends BasePage
 	@FindBy(xpath="(//div[@class='more-menu'])[1]") WebElement moremenu;
 	@FindBy(xpath="//span[contains (text(),'Adjustments')]") WebElement adjestment;
 	@FindBy(xpath="//span[contains(text(), 'Add adjustment')]") WebElement addadjestmentbtn;
-	@FindBy(xpath="//input[@placeholder='Create or search for an adjustment']") WebElement adjestmentname;
+	@FindBy(xpath="//input[@placeholder='Adjustment name']") WebElement adjestmentname;
 	@FindBy(id="adjustment-dollar-percent-toggle") WebElement percenttoggle;
 	@FindBy(id="adjustment-amount") WebElement adjestmentamount;
-	@FindBy(xpath="(//span[contains(text(), 'Add')])[5]") WebElement addadjestment;
+	@FindBy(xpath="(//span[contains(text(), 'Add')])[4]") WebElement addadjestment;
 	@FindBy(xpath="//a[text()='+ New location']") WebElement createnewlocation;
 	@FindBy(xpath="//input[@placeholder='Location name']")  WebElement locationname;
 	@FindBy(id="optional-locOrSys-button") WebElement optionallocationtoggle;
@@ -43,12 +42,12 @@ public class Quote_Page extends BasePage
 	@FindBy(xpath="//span[contains(text(), 'Create proposal')]")  WebElement createproposalbtn;
 	@FindBy(id="itemDisplay")  WebElement itemdispaly;
 	@FindBy(xpath="//mat-icon[@svgicon='addAccessory']") WebElement addaccessory;
-	@FindBy(xpath="(//span[contains(text(), 'Add')])[4]") WebElement addaccessorybtn;
+	@FindBy(xpath="(//span[contains(text(), 'Add')])[3]") WebElement addaccessorybtn;
 	@FindBy(xpath="//mat-icon[@svgicon='multimedia-proposal']") WebElement multimediaproposal;
 	@FindBy(xpath="//div[contains(text(), 'Quick Quote')]") WebElement Quickquoteproposal;
 	@FindBy(xpath="//span[text()='Create']") WebElement createbtn;
 	@FindBy(id="present-proposal")  WebElement presentproposal;
-	@FindBy(xpath="//span[contains(text(),'Accept & Sign')]") WebElement acceptandsignbtn;
+	@FindBy(xpath="//span[contains(text(),'Accept & Pay')]") WebElement acceptandsignbtn;
 	@FindBy(xpath="//input[@placeholder='Email']") WebElement email;
 	@FindBy(xpath="//input[@placeholder='First name']") WebElement firstname;
 	@FindBy(xpath="//input[@placeholder='Last name']") WebElement lastname;
@@ -63,10 +62,15 @@ public class Quote_Page extends BasePage
 	@FindBy(id="projectNumber")  WebElement projectnumber;
 	@FindBy(id="nav-service-plan-list-design")  WebElement serviceplan;
 	@FindBy(id="btn-quote-service-plan-add")  WebElement addserviceplan;
-	@FindBy(xpath="//*[@id=\"mat-mdc-dialog-12\"]/div/div/app-service-plan-add/div/div[2]/div/app-selection-manager/table/tbody/tr[2]") WebElement april13;
+	@FindBy(xpath="(//input[@type='checkbox'])[2]") WebElement april13;
+	@FindBy(xpath="//span[contains (text(), 'Monitoring Agreements')]") WebElement monitouringagreement;
 	@FindBy(xpath="(//span[contains(text(), 'Add')])[3]") WebElement serviceadd;
-	@FindBy(xpath="//mat-card-title[contains(text(),  'Recommended Plan')]") WebElement recommendedplan;
+	@FindBy(xpath="//span[contains (text(), 'Service Agreements')]") WebElement recommendedplan;
 	@FindBy(id="nav-visual-design")  WebElement planview;
+	@FindBy(xpath="(//input[@id='add-product-search'])[2]") WebElement accessoriessearch;
+	@FindBy(xpath="//span[contains(text(), 'Settings')]") WebElement quotesettings;
+	@FindBy(xpath="(//mat-icon[@svgicon='closeIcon'])[4]") WebElement adjestmentcloseicon;
+	
 	
 	
 	
@@ -88,7 +92,7 @@ public class Quote_Page extends BasePage
 	@FindBy(xpath="//span[normalize-space()='Create']")WebElement create;
 	@FindBy(xpath="//mat-icon[@class='mat-icon notranslate cursor-pointer m-l-r-10 slate-grey mat-icon-no-color ng-star-inserted']//*[name()='svg']//*[name()='path'][2]")  WebElement img;
 	@FindBy(xpath="//a[normalize-space()='Edit']")  WebElement edit;
-	@FindBy(xpath="//button[@class='primary mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted']//span[@class='mat-mdc-button-touch-target']")  WebElement createProposal;
+	@FindBy(xpath="//span[contains (text(),  'Create proposal')]")  WebElement createProposal;
 	
 	
 	
@@ -108,9 +112,10 @@ public class Quote_Page extends BasePage
 		Thread.sleep(2000);
 	}
 	
-	public void add_item()
+	public void add_item() throws InterruptedException
 	{
 		addtoquote.click();
+		Thread.sleep(2000);
 	}
 	
 	public String itemvalidation()
@@ -120,16 +125,21 @@ public class Quote_Page extends BasePage
 		
 	}
 	
-	public void addadjestment() throws IOException
+	public void addadjestment() throws IOException, InterruptedException
 	{
 		moremenu.click();
+		Thread.sleep(1000);
+		quotesettings.click();
+		Thread.sleep(1000);
 		adjestment.click();
 		addadjestmentbtn.click();
 		adjestmentname.sendKeys(Base.getProperties().getProperty("adjestment_name"));
 		percenttoggle.click();
 		adjestmentamount.clear();
 		adjestmentamount.sendKeys(Base.getProperties().getProperty("adjestment_value"));
-		addadjestment.click();		
+		addadjestment.click();	
+		Thread.sleep(2000);
+		adjestmentcloseicon.click();
 	}
 	
 	public boolean adjestmentvalidation()
@@ -167,8 +177,17 @@ public class Quote_Page extends BasePage
 	
 	public String laborvalidation()
 	{
-		String toast = toastmsg.getText();
-		return toast;
+		try 
+		{
+			String toast = toastmsg.getText();
+			return toast;
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+			return null;
+		
 		
 	}
 	
@@ -177,8 +196,10 @@ public class Quote_Page extends BasePage
 		itemdispaly.click();
 		Thread.sleep(3000);
 		addaccessory.click();
-		itemsearch.sendKeys(Base.getProperties().getProperty("accessory"));
+		accessoriessearch.sendKeys(Base.getProperties().getProperty("accessory"));
 		Thread.sleep(3000);
+		firstitem.click();
+		Thread.sleep(2000);
 		addaccessorybtn.click();
 		Thread.sleep(2000);
 		addaccessorybtn.click();
@@ -201,7 +222,7 @@ public class Quote_Page extends BasePage
 		firstname.sendKeys(Base.getProperties().getProperty("firstname"));
 		lastname.sendKeys(Base.getProperties().getProperty("Lastname"));
 		Acceptproposal.click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		returnproposal.click();
 		Thread.sleep(2000);
 		proposalbackbtn.click();
@@ -228,6 +249,9 @@ public class Quote_Page extends BasePage
 	public void add_service_plan()
 	{
 		serviceplan.click();
+		addserviceplan.click();
+		april13.click();
+		monitouringagreement.click();
 		april13.click();
 		serviceadd.click();
 	}

@@ -14,3 +14,4 @@ Feature: Create New Opportunity
     And the user click next button
     And the user click create button
     Then validate the opportunity created or not
+    
