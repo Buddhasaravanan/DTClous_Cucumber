@@ -23,6 +23,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
@@ -139,6 +140,12 @@ public class Base {
 		
 		r.keyPress(KeyEvent.VK_ENTER);
 		r.keyRelease(KeyEvent.VK_ENTER);
+	}
+	
+	public static WebDriverWait elementloader()
+	{
+		WebDriverWait wait = new WebDriverWait(Base.getdriver(), Duration.ofSeconds(30));
+		return wait;
 	}
 	
 

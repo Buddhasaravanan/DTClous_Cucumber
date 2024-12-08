@@ -63,7 +63,7 @@ public class Quote_Proposal_Steps
 	}
 
 	@When("the user create new optional location")
-	public void the_user_create_new_optional_location() throws IOException 
+	public void the_user_create_new_optional_location() throws IOException, InterruptedException 
 	{
 	    qp.create_optional_location();
 	}

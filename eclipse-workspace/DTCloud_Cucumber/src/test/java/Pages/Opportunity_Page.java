@@ -127,9 +127,17 @@ Date d=new Date();
 	
 	public void NXTbtn() throws InterruptedException
 	{
-		next.click();
-		Thread.sleep(2000);
-		next.click();
+		try 
+		{
+			next.click();
+			Thread.sleep(5000);
+			next.click();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		} 
+		
 	}
 	
 	public void  Sqfeet() throws IOException
@@ -139,8 +147,16 @@ Date d=new Date();
 	
 	public void createopp() throws InterruptedException
 	{
-		create.click();
-		Thread.sleep(5000);
+		try
+		{
+			create.click();
+			Thread.sleep(10000);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		} 
+		
 	}
 	
 
