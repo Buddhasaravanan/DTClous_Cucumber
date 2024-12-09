@@ -19,5 +19,6 @@ Feature: Qoute and proposal
     Then validating service plan added or not
     When the user create new multimedia proposal
     And the user go to present proposal and accept the proposal
+    And the user make payment via DTP
     And the user won the opportunity
     Then Validating new project created

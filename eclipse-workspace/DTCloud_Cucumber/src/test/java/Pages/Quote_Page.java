@@ -1,6 +1,8 @@
 package Pages;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,9 +10,11 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import factory.Base;
 
@@ -59,7 +63,7 @@ public class Quote_Page extends BasePage
 	@FindBy(xpath=" //span[contains (text(), 'Accept & Proceed to Payment')]") WebElement Acceptproposal;
 	@FindBy(xpath="//span[contains(text(),'Return to proposal')]") WebElement returnproposal;
 	@FindBy(xpath="//mat-icon[@svgicon='backIcon']") WebElement proposalbackbtn;
-	@FindBy(xpath="//mat-icon[@svgicon='closeIcon']") WebElement proposalclosebtn;
+	@FindBy(xpath="//mat-icon[@svgicon='closeIcon']") WebElement proposalclosebtn;   
 	@FindBy(xpath="//span[normalize-space()='Won']") WebElement wonbtn;
 	@FindBy(xpath="//span[normalize-space()='Create project']") WebElement createproject;	
 	@FindBy(xpath="//div[@id='192259']//div[@class='filter-info']")WebElement kitchen;
@@ -246,19 +250,137 @@ public class Quote_Page extends BasePage
 			acceptandsignbtn.click();
 			
 			WebElement acceptbtn = Acceptproposal;
-				if(acceptbtn.isEnabled())	
+				if(acceptbtn.isSelected())	
 				{
 					acceptbtn.click();
-					Thread.sleep(10000);
+					Thread.sleep(5000);
 				}
-				else
+				else 
 				{
 					email.sendKeys(Base.getProperties().getProperty("proposal_email"));
 					firstname.sendKeys(Base.getProperties().getProperty("firstname"));
 					lastname.sendKeys(Base.getProperties().getProperty("Lastname"));
 					Acceptproposal.click();
-					Thread.sleep(10000);
+					Thread.sleep(5000);
 				}
+				
+		}
+				
+				catch (Exception e)
+				{
+					System.out.println(e.getMessage());
+				}
+					
+				
+			
+	}
+				
+		
+		
+		
+				
+		public void payment()
+		{
+			try
+			{
+				proposalclosebtn.click();
+				Thread.sleep(2000);
+				proposalbackbtn.click();
+				Thread.sleep(2000);
+				proposalbackbtn.click();
+				Thread.sleep(2000);
+				proposalbackbtn.click();
+				Thread.sleep(2000);
+				
+				/*WebDriverWait wait = new WebDriverWait(Base.getdriver(), Duration.ofSeconds(30));
+				
+				JavascriptExecutor js = (JavascriptExecutor) Base.getdriver();
+				
+				 WebElement shadowHost = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("rainforest-payment[allowed-methods='CARD,ACH,APPLE_PAY']")));
+				 SearchContext shadowRoot = (SearchContext) js.executeScript("return arguments[0].shadowRoot", shadowHost);
+				 
+				 System.out.println(js.executeScript("return arguments[0].outerHTML;", shadowRoot));
+				 
+				 WebElement subHost = (WebElement) js.executeScript("return arguments[0].querySelector('rainforest-card[style-button-color=\"#0dbb7d\"]');", shadowRoot);
+				 
+				 if (subHost == null) 
+				 {
+			         throw new RuntimeException("Subhost element not found");
+			     } 
+			     
+			    	 SearchContext subShadowRoot = (SearchContext) js.executeScript("return arguments[0].shadowRoot", subHost);
+			    	 
+			    	 System.out.println(js.executeScript("return arguments[0].outerHTML;", subShadowRoot));
+			     
+				 
+				 WebElement subHost1 = (WebElement) js.executeScript("return arguments[0].querySelector('rainforest-card[[name='pan']');", shadowRoot);
+				 
+				 if (subHost1 == null) 
+				 {
+			         throw new RuntimeException("Subhost element not found");
+			         
+			     } 
+			     
+			    	 SearchContext subShadowRoot1 = (SearchContext) js.executeScript("return arguments[0].shadowRoot", subHost1);
+			    	 
+			    	 System.out.println(js.executeScript("return arguments[0].outerHTML;", subShadowRoot1));
+			     
+				 
+				 WebElement iframe = (WebElement) js.executeScript("return arguments[0].querySelector('iframe[name='pan']');", subShadowRoot1);
+
+			        if (iframe == null) 
+			        {
+			            throw new RuntimeException("Iframe element not found");
+			        }
+			        
+			        Base.getdriver().switchTo().frame(iframe);
+			        
+			        WebElement cardNumberInput = driver.findElement(By.cssSelector("input[placeholder='Card number']"));
+			        cardNumberInput.sendKeys(Base.getProperties().getProperty("Creditcard"));
+			        
+			        Base.getdriver().switchTo().defaultContent();
+
+
+			        
+				 
+			     
+			    WebElement subHost = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("rainforest-card[style-button-color='#0dbb7d']")));
+			     SearchContext subShadowRoot = subHost.getShadowRoot();
+			     
+			     WebElement subHost1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("rainforest-card[name='pan']")));
+			     SearchContext subShadowRoot1 = subHost1.getShadowRoot();
+			     
+			     WebElement iframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("iframe[name='pan']")));
+			     
+			     Base.getdriver().switchTo().frame(iframe);
+			     
+			     WebElement cardNumberInput = driver.findElement(By.cssSelector("input[placeholder='Card number']"));
+			     cardNumberInput.sendKeys(Base.getProperties().getProperty("Creditcard"));
+			     
+			     Base.getdriver().switchTo().defaultContent();
+			     
+			     
+
+				WebElement shadowhost = Base.getdriver().findElement((By) wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("rainforest-payment[allowed-methods='CARD,ACH,APPLE_PAY']"))));
+				SearchContext shadowroot0 = shadowhost.getShadowRoot();
+				Thread.sleep(3000);
+				
+				SearchContext subhost = shadowhost.findElement((By) wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("rainforest-card[style-button-color='#0dbb7d']"))).getShadowRoot());
+				Thread.sleep(3000);
+				
+				SearchContext subhost1 = shadowhost.findElement((By) wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("rainforest-card[style-button-color='#0dbb7d']"))).getShadowRoot());
+				Thread.sleep(3000);
+				
+				WebElement iframe = subhost1.findElement((By) wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[placeholder='Card number']"))));
+				
+				Base.getdriver().switchTo().frame(iframe);
+				
+				iframe.findElement(By.cssSelector("input(placeholder='Card number')")).sendKeys(Base.getProperties().getProperty("Creditcard"));
+				
+				Base.getdriver().switchTo().defaultContent();
+				
+				
+				
 				
 				
 				WebElement Mainhost = Base.elementloader().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("rainforest-payment[allowed-methods='CARD,ACH,APPLE_PAY']")));
@@ -282,7 +404,7 @@ public class Quote_Page extends BasePage
 
 				
 				
-				//DTPcardnumber.sendKeys(Base.getProperties().getProperty("Creditcard"));
+				DTPcardnumber.sendKeys(Base.getProperties().getProperty("Creditcard"));
 				
 				//This Element is inside 2 nested shadow DOM.
 				
@@ -293,7 +415,7 @@ public class Quote_Page extends BasePage
 				shadow1.findElement(By.cssSelector("input[placeholder='MM / YY']")).sendKeys(Base.getProperties().getProperty("M/D"));
 			    Thread.sleep(1000);
 				
-			  //This Element is inside single shadow DOM.
+			  
 			    SearchContext shadow = showdowhostmain.getShadowRoot();
 			    Thread.sleep(1000);
 			    shadow.findElement(By.cssSelector("button[data-testid='payment-submit-button']")).click();
@@ -306,15 +428,17 @@ public class Quote_Page extends BasePage
 				proposalclosebtn.click();
 				Thread.sleep(2000);
 				proposalbackbtn.click();
-				Thread.sleep(2000);
-		}
-		catch (Exception e)
-		{
-			System.out.println(e.getMessage());
-		}
+				Thread.sleep(2000);*/
+			}
 			
-		
-	}
+			catch (Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+				
+				
+		}
+	
 	
 	public void won_opportunity() throws InterruptedException
 	{

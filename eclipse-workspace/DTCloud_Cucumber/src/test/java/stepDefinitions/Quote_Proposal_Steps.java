@@ -117,6 +117,13 @@ public class Quote_Proposal_Steps
 	{
 	    qp.presentproposal();
 	}
+	
+	@When("the user make payment via DTP")
+	public void the_user_make_payment_via_dtp() 
+	{
+	    qp.payment();
+	}
+
 
 	@When("the user won the opportunity")
 	public void the_user_won_the_opportunity() throws InterruptedException 

@@ -4,9 +4,7 @@ import java.awt.AWTException;
 import java.io.IOException;
 import java.util.Date;
 
-
-
-
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -118,10 +116,10 @@ Date d=new Date();
 	
 	public void client() throws IOException, InterruptedException, AWTException
 	{
-		clientName.sendKeys(Base.getProperties().getProperty("Cname"));
-		Thread.sleep(2000);
-		Base.Enter();
-		Thread.sleep(2000);
+		clientName.sendKeys(Base.getProperties().getProperty("Cname") + Keys.ENTER);
+		//Thread.sleep(3000);
+		//Base.Enter();
+		//Thread.sleep(3000);
 		
 	}
 	
@@ -130,7 +128,7 @@ Date d=new Date();
 		try 
 		{
 			next.click();
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			next.click();
 		}
 		catch (Exception e)
