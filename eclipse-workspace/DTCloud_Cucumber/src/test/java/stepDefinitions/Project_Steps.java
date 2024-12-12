@@ -54,7 +54,7 @@ public class Project_Steps
 	@When("the user create new task from newly created task group")
 	public void the_user_create_new_task_from_newly_created_task_group() throws IOException, InterruptedException 
 	{
-		prp.createtask();
+		prp.newtaskgrouptask();
 	}
 
 	@When("the user edit the task")

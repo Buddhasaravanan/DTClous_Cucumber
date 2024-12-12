@@ -36,7 +36,8 @@ public class Project_Page extends BasePage
 	
 	@FindBy(xpath="//span[contains (text(), 'Tasks')]") WebElement tasks;
 	@FindBy(xpath="(//a[contains (text(), 'create a new task')])[1]") WebElement createnewtask;
-	@FindBy(xpath="//input[@placeholder='New task']") WebElement taskname;
+	@FindBy(xpath="(//a[contains (text(), 'create a new task')])[3]") WebElement createnewtask1;
+	@FindBy(xpath="//input[@placeholder='Task name']") WebElement taskname;
 	@FindBy(xpath="//mat-icon[@svgicon='calendarRange']") WebElement taskcalender;	
 	@FindBy(xpath="//mat-icon[@svgicon='person']") WebElement resource;
 	@FindBy(xpath="//span[contains (text(),'Ajai DND')]") WebElement resource1;
@@ -47,7 +48,7 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//mat-icon[@svgicon='closeIcon']") WebElement canceltask;
 	@FindBy(xpath="//span[contains (text(),'Schedule')]") WebElement schedule;
 	@FindBy(xpath="//span[contains (text(),'New task group')]") WebElement newtaskgroup;
-	@FindBy(xpath="//input[@placeholder='New task group']") WebElement taskgroupname;
+	@FindBy(xpath="//input[@placeholder='Task group name']") WebElement taskgroupname;
 	@FindBy(xpath="(//span[@class='elipseName'])[1]") WebElement tasknameclick;
 	@FindBy(xpath="(//mat-icon[@svgicon='moreHorzIcon'])[3]") WebElement taskmoreicon;
 	@FindBy(xpath="//span[contains (text(), 'Edit')]") WebElement taskedit;
@@ -102,6 +103,9 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//span[contains (text(), 'Email')]") WebElement shareemail;
 	@FindBy(xpath="//app-contacts-integration[@placeholder='Type here to enter email or contact']") WebElement toemail;
 	@FindBy(xpath="//span[contains (text(), 'Send')]") WebElement sendmail;
+	@FindBy(xpath="(//span[contains (text(), '10')])[2]") WebElement date;
+	
+	
 	
 	
 	
@@ -120,20 +124,23 @@ public class Project_Page extends BasePage
 	{
 		createnewtask.click();
 		taskname.sendKeys(Base.getProperties().getProperty("Taskname"));
-		taskcalender.click();
+		Actions act = new Actions(Base.getdriver());
+		act.moveToElement(taskcalender).click().perform();
+		Thread.sleep(2000);
+		act.moveToElement(date).click().perform();
 		
-		String Date ="10";
+		/*String Date ="10";
 		
-	List<WebElement>Alldates = driver.findElements(By.xpath("//*[@id=\"mat-datepicker-92\"]/div/mat-month-view/table/tbody"));
+	List<WebElement>Alldates = Base.getdriver().findElements(By.xpath("//mat-calendar[starts-with(@class,'mat-calendar ng-tns-c3019359441')]/div/mat-month-view/table/tbody"));
 	
 	for (WebElement dt:Alldates)
 	{
 		if(dt.getText().equals(Date))
 		{
-			dt.click();
+			act.moveToElement(dt).click().perform();
 			break;
 		}
-	}
+	}*/
 	
 	resource.click();
 	Thread.sleep(2000);
@@ -144,6 +151,32 @@ public class Project_Page extends BasePage
 		
 	}
 	
+	public void newtaskgrouptask()
+	{
+		//Actions act = new Actions(Base.getdriver());
+		
+		try 
+		{
+			createnewtask1.click();
+			taskname.sendKeys(Base.getProperties().getProperty("Taskname"), Keys.TAB, Keys.ENTER);
+			/*act.moveToElement(taskcalender).click().perform();
+			Thread.sleep(2000);*/
+			//act.moveToElement(date).click().perform();
+			Thread.sleep(2000);
+			date.click();
+			resource.click();
+			resource1.click();
+			resource2.click();
+			assign.click();
+			create.click();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+
 	public boolean validatetask()
 	{
 		boolean tv = schedule.isDisplayed();
@@ -153,9 +186,18 @@ public class Project_Page extends BasePage
 	
 	public void createtaskgroup() throws IOException
 	{
-		newtaskgroup.click();
-		taskgroupname.sendKeys(Base.getProperties().getProperty("Taskgroupname"));
-		create.click();
+		try
+		{
+			newtaskgroup.click();
+			taskgroupname.sendKeys(Base.getProperties().getProperty("Taskgroupname"));
+			create.click();
+			Thread.sleep(3000);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 	public String validationtaskgroup()

@@ -253,7 +253,7 @@ public class Quote_Page extends BasePage
 				if(acceptbtn.isSelected())	
 				{
 					acceptbtn.click();
-					Thread.sleep(5000);
+					Thread.sleep(10000);
 				}
 				else 
 				{
@@ -261,7 +261,7 @@ public class Quote_Page extends BasePage
 					firstname.sendKeys(Base.getProperties().getProperty("firstname"));
 					lastname.sendKeys(Base.getProperties().getProperty("Lastname"));
 					Acceptproposal.click();
-					Thread.sleep(5000);
+					Thread.sleep(10000);
 				}
 				
 		}

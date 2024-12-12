@@ -46,7 +46,7 @@ Date d=new Date();
 	@FindBy(xpath="//span[contains (text(), 'Residential')]")  WebElement residential;
 	@FindBy(id="opportunityBudget")  WebElement oppbudget;
 	//@FindBy(xpath="//div[@aria-expanded='true']")  WebElement quotetype;
-	@FindBy(id="quoteType")  WebElement quotetype;
+	@FindBy(xpath="//ng-select[@id=\"quoteType\"]")  WebElement quotetype;
 	@FindBy(xpath="//span[contains (text(), 'Bid/Spec')]")  WebElement bid;
 	@FindBy(xpath="//button[contains (text(), 'OK')]")  WebElement cacshpopup;
 	
@@ -103,7 +103,7 @@ Date d=new Date();
 			mrk.click();
 			Thread.sleep(1000);
 			markettypesingle.click();
-			Thread.sleep(1000);
+			
 		}
 		
 		catch (Exception e)
