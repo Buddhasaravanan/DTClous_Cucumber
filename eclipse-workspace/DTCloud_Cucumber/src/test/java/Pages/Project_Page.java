@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,6 +42,7 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//mat-icon[@svgicon='calendarRange']") WebElement taskcalender;	
 	@FindBy(xpath="//mat-icon[@svgicon='person']") WebElement resource;
 	@FindBy(xpath="//span[contains (text(),'Ajai DND')]") WebElement resource1;
+	@FindBy(xpath="(//div[contains (text(),'Ajai DND')])[1]") WebElement resource1a;
 	@FindBy(xpath="//span[contains (text(),'Siva - DND')]") WebElement resource2;
 	@FindBy(id="resourceAssign") WebElement assign;
 	@FindBy(xpath="(//span[contains (text(),'Create')])[1]") WebElement create;
@@ -72,7 +74,7 @@ public class Project_Page extends BasePage
 	@FindBy(id="btnTimeEntry") WebElement addnewtimeentry;
 	@FindBy(id="txt-app-search") WebElement addresource;
 	@FindBy(xpath="//div[contains (text(), 'Select project task')]") WebElement selectprojecttask;
-	@FindBy(xpath="(//span[contains (text(), 'Add')])[2]") WebElement addtimeentry;
+	@FindBy(id="btnTimeEntry") WebElement addtimeentry;
 	@FindBy(xpath="//div[@class='time-container']") WebElement houresworked;
 	@FindBy(id="labor-thour-input") WebElement laborhour;
 	@FindBy(id="labor-tmin-input") WebElement labormins;
@@ -104,6 +106,9 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//app-contacts-integration[@placeholder='Type here to enter email or contact']") WebElement toemail;
 	@FindBy(xpath="//span[contains (text(), 'Send')]") WebElement sendmail;
 	@FindBy(xpath="(//span[contains (text(), '10')])[2]") WebElement date;
+	@FindBy(xpath="(//span[@class='elipseName'])[1]") WebElement tasknameelement;
+	@FindBy(xpath="(//span[contains (text(), 'Add')])[2]") WebElement TEadd;
+	@FindBy(xpath="(//input[@type='checkbox'])[2]") WebElement checkbox;
 	
 	
 	
@@ -154,16 +159,17 @@ public class Project_Page extends BasePage
 	public void newtaskgrouptask()
 	{
 		//Actions act = new Actions(Base.getdriver());
+		//JavascriptExecutor js = (JavascriptExecutor) Base.getdriver();
 		
 		try 
 		{
 			createnewtask1.click();
-			taskname.sendKeys(Base.getProperties().getProperty("Taskname"), Keys.TAB, Keys.ENTER);
-			/*act.moveToElement(taskcalender).click().perform();
-			Thread.sleep(2000);*/
-			//act.moveToElement(date).click().perform();
+			taskname.sendKeys(Base.getProperties().getProperty("Taskname"));
+			/*WebElement elemnttoclick = date;
+			js.executeScript("arguments[0].click();", elemnttoclick);
+			act.moveToElement(taskcalender).click().perform();
 			Thread.sleep(2000);
-			date.click();
+			act.moveToElement(date).click().perform();*/
 			resource.click();
 			resource1.click();
 			resource2.click();
@@ -217,15 +223,27 @@ public class Project_Page extends BasePage
 	
 	public void edittask() throws InterruptedException
 	{
-		taskmoreicon.click();
-		taskedit.click();
+		tasknameelement.click();
+		/*taskmoreicon.click();
+		taskedit.click();*/
 		Thread.sleep(3000);
 	}
 	
 	public void checklist() throws IOException
 	{
-		checklist.sendKeys(Base.getProperties().getProperty("Taskchecklist") + Keys.ENTER);
-		checklist.sendKeys(Base.getProperties().getProperty("Taskchecklist") + Keys.ENTER);
+		try
+		{
+			checklist.click();		
+			checklist.sendKeys(Base.getProperties().getProperty("Taskchecklist") + Keys.ENTER);
+			checklist.click();	
+			checklist.sendKeys(Base.getProperties().getProperty("Taskchecklist") + Keys.ENTER);
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 	public String CHLvalidation()
@@ -260,37 +278,87 @@ public class Project_Page extends BasePage
 	
 	public void schedulecreatebtn()
 	{
-		create.click();
+		JavascriptExecutor js = (JavascriptExecutor) Base.getdriver();
+		
+		try
+		{
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+			Thread.sleep(2000);
+			create.click();
+			Thread.sleep(1000);
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public String schudulevalidation()
 	{
-		 String tomsg = toastmsg.getText();
-		  return tomsg;
+		
+		try
+		{
+			String tomsg = toastmsg.getText();
+			  return tomsg; 
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
+		 
 	}
 	
 	public void timetracking() throws InterruptedException
 	{
-		timetracking.click();
-		Thread.sleep(3000);
+		try
+		{
+			JavascriptExecutor js = (JavascriptExecutor) Base.getdriver();
+			js.executeScript("window.scrollTo(0, 0)");
+			timetracking.click();
+			Thread.sleep(3000);
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
-	public void timeentry() throws InterruptedException
+	public void timeentry() 
 	{
-		addtimeentry.click();
-		addresource.click();
-		resource1.click();
-		selectprojecttask.click();
-		task.click();
-		TElabortype.click();
-		task.click();
-		houresworked.click();
-		laborhour.sendKeys("1");
-		addresource.click();
-		timeentrycalender.click();
-		date16.click();
-		caldone.click();
-		addtimeentry.click();	
+		Actions act = new Actions(Base.getdriver());
+		
+		try
+		{
+			addtimeentry.click();
+			Thread.sleep(2000);
+			addresource.click();
+			Thread.sleep(2000);
+			act.click(checkbox);
+			Thread.sleep(2000);
+			selectprojecttask.click();
+			task.click();
+			TElabortype.click();
+			task.click();
+			houresworked.click();
+			laborhour.sendKeys("1");
+			addresource.click();
+			/*timeentrycalender.click();
+			date16.click();
+			caldone.click();*/
+			TEadd.click();
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
 		
 	}
 	

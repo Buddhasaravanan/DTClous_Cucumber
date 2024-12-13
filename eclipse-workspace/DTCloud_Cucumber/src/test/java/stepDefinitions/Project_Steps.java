@@ -60,7 +60,6 @@ public class Project_Steps
 	@When("the user edit the task")
 	public void the_user_edit_the_task() throws InterruptedException 
 	{
-	    prp.hower();
 	    prp.edittask();
 	}
 	@When("the user create check list")

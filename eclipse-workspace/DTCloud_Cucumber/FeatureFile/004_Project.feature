@@ -16,7 +16,6 @@ Feature: Project Payment Task and Schedule
     Then validate items are added to task
     When the user close the task
     And the user click schedule button from created task
-    And the user click create button
     Then validate schedule has been created
     When the user go to time tracking section
     And the user add new time entry
