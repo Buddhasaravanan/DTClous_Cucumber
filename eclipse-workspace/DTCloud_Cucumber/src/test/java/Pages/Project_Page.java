@@ -73,7 +73,7 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//span[contains (text(), 'Time Tracking')]") WebElement timetracking;
 	@FindBy(id="btnTimeEntry") WebElement addnewtimeentry;
 	@FindBy(id="txt-app-search") WebElement addresource;
-	@FindBy(xpath="//div[contains (text(), 'Select project task')]") WebElement selectprojecttask;
+	@FindBy(xpath="(//input[@aria-autocomplete='list'])[2]") WebElement selectprojecttask;
 	@FindBy(id="btnTimeEntry") WebElement addtimeentry;
 	@FindBy(xpath="//div[@class='time-container']") WebElement houresworked;
 	@FindBy(id="labor-thour-input") WebElement laborhour;
@@ -81,7 +81,7 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="//input[@placeholder='Select Date(s)']") WebElement timeentrycalender;
 	@FindBy(xpath="//span[contains (text(), '16')]") WebElement date16;
 	@FindBy(xpath="//span[contains (text(),'Done')]") WebElement caldone;
-	@FindBy(xpath="//ng-select[@placeholder='Select labor type']") WebElement TElabortype;
+	@FindBy(xpath="(//span[@class='ng-arrow-wrapper'])[3]") WebElement TElabortype;
 	@FindBy(xpath="(//div[@role='option'])[2]") WebElement task;
 	
 	
@@ -109,6 +109,10 @@ public class Project_Page extends BasePage
 	@FindBy(xpath="(//span[@class='elipseName'])[1]") WebElement tasknameelement;
 	@FindBy(xpath="(//span[contains (text(), 'Add')])[2]") WebElement TEadd;
 	@FindBy(xpath="(//input[@type='checkbox'])[2]") WebElement checkbox;
+	@FindBy(xpath="//div[contains (text(),'Dismiss')]") WebElement dismiss;
+	@FindBy(xpath="//div[@class='banner orange']") WebElement qbxerobanner;
+	@FindBy(xpath="(//div[contains (text(),'Ajai DND')])[1]") WebElement ajay;
+	@FindBy(xpath="(//label[contains (text(),'Add Time Entry')])[1]") WebElement TEtitle;
 	
 	
 	
@@ -116,9 +120,39 @@ public class Project_Page extends BasePage
 	
 	public void plan()
 	{
-		plan.click();
+		WebElement banner = qbxerobanner;
+		try
+		{
+			Thread.sleep(2000);
+			boolean  isnotvisible = false;
+			
+			if(banner.isDisplayed())
+			{
+				dismiss.click();
+				Thread.sleep(1000);
+				dismiss.click();
+				plan.click();
+			}
+			else if(isnotvisible(banner))
+			{
+				plan.click();
+				System.out.println("QB Banner Missing");
+			}
+			
+			
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
+	private boolean isnotvisible(WebElement banner) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public void task() throws InterruptedException
 	{
 		tasks.click();
@@ -223,10 +257,42 @@ public class Project_Page extends BasePage
 	
 	public void edittask() throws InterruptedException
 	{
-		tasknameelement.click();
-		/*taskmoreicon.click();
-		taskedit.click();*/
-		Thread.sleep(3000);
+		JavascriptExecutor js = (JavascriptExecutor) Base.getdriver();
+		
+		WebElement telement = tasknameelement;
+		WebElement task = timetracking;
+		
+		try
+		{
+			js.executeScript("arguments[0].scrollIntoView(true);", task);
+			Thread.sleep(1000);	
+			telement.click();
+			Thread.sleep(3000);
+			
+			/*if(task.isEnabled())
+			{
+				telement.click();
+				taskmoreicon.click();
+				taskedit.click();
+				Thread.sleep(3000);	*/
+			}
+			/*else
+			{
+				js.executeScript("arguments[0].scrollIntoView(true);", task);
+				Thread.sleep(1000);	
+				telement.click();
+				Thread.sleep(3000);	
+				
+			}
+			
+	}*/
+		
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+		
 	}
 	
 	public void checklist() throws IOException
@@ -332,22 +398,26 @@ public class Project_Page extends BasePage
 	public void timeentry() 
 	{
 		Actions act = new Actions(Base.getdriver());
+		JavascriptExecutor js = (JavascriptExecutor) Base.getdriver();
 		
 		try
 		{
 			addtimeentry.click();
-			Thread.sleep(2000);
 			addresource.click();
 			Thread.sleep(2000);
-			act.click(checkbox);
+			ajay.click();
+			Thread.sleep(2000);
+			js.executeScript("window.scrollBy(0, 500)");
 			Thread.sleep(2000);
 			selectprojecttask.click();
-			task.click();
-			TElabortype.click();
+			Thread.sleep(2000);
 			task.click();
 			houresworked.click();
+			laborhour.clear();
 			laborhour.sendKeys("1");
-			addresource.click();
+			TElabortype.click();
+			Thread.sleep(2000);
+			task.click();
 			/*timeentrycalender.click();
 			date16.click();
 			caldone.click();*/
