@@ -412,12 +412,12 @@ public class Project_Page extends BasePage
 			selectprojecttask.click();
 			Thread.sleep(2000);
 			task.click();
-			houresworked.click();
-			laborhour.clear();
-			laborhour.sendKeys("1");
 			TElabortype.click();
 			Thread.sleep(2000);
 			task.click();
+			houresworked.click();
+			laborhour.clear();
+			laborhour.sendKeys("1");
 			/*timeentrycalender.click();
 			date16.click();
 			caldone.click();*/
